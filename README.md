@@ -35,24 +35,24 @@ pip install discordme.py
 
 ### 🔐 **Log in with your Discord credentials**  
 ```python
-from discordme import get_token
+import discordme
 
 email = "email@example.com"
 password = "your_password"
-token = get_token(email, password)
+token = discordme.get_token(email, password)
 
 print(f"Your token: {token}")
 ```
 
 ### ✉️ **Send a message in a channel or DM**  
 ```python
-from discordme import send_message
+import discordme
 
 token = "your_token"
 channel_id = "123456789012345678"  # Channel or user ID (DM)
 message = "Hello everyone! 🚀"
 
-status_code = send_message(token, channel_id, message)
+status_code = discordme.send_message(token, channel_id, message)
 if status_code == 200:
     print("Message sent successfully! 🎉")
 else:
@@ -61,14 +61,14 @@ else:
 
 ### 😍 **Add a reaction to a message**  
 ```python
-from discordme import add_reaction
+import discordme
 
 reaction = "❤️"  # Emoji to add
 channel_id = "123456789012345678"  # Channel ID
 message_id = "987654321098765432"  # Message ID
 token = "your_token"
 
-status_code = add_reaction(reaction, channel_id, message_id, token)
+status_code = discordme.add_reaction(reaction, channel_id, message_id, token)
 if status_code == 204:
     print("Reaction added successfully! 🎉")
 else:
@@ -77,24 +77,24 @@ else:
 
 ### ✏️ **Change your custom status**  
 ```python
-from discordme import change_status
+import discordme
 
 token = "your_token"
 text = "Available for coding 🐍"
 emoji = "💻"
 
-change_status(token, text, emoji)
+discordme.change_status(token, text, emoji)
 print("Custom status updated! 🎯")
 ```
 
 ### 📝 **Update your Discord bio**  
 ```python
-from discordme import change_bio
+import discordme
 
 token = "your_token"
 new_bio = "Passionate Python and Discord API developer 🚀"
 
-change_bio(token, new_bio)
+discordme.change_bio(token, new_bio)
 print("Bio successfully updated! ✅")
 ```
 
