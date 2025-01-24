@@ -1,138 +1,137 @@
-
 # 🎉 DiscordMe 🐍  
 
-**Une bibliothèque Python puissante et sécurisée pour interagir avec l'API Discord en toute simplicité, tout en évitant les bannissements et restrictions de compte.**  
+**A powerful and secure Python library to interact effortlessly with the Discord API while avoiding account bans and restrictions.**  
 
 ---
 
-## 🚀 **Fonctionnalités clés**  
-✅ **Connexion sécurisée** avec vos identifiants Discord pour récupérer votre token automatiquement.  
-✅ Envoyez des **messages privés**, des **messages dans des salons**, ou encore des **réactions aux messages**.  
-✅ Modifiez rapidement votre **statut personnalisé**, votre **bio**, ou même supprimez votre statut actuel.  
-✅ **Sécurité intégrée** : minimisez les risques de bannissement grâce à des appels conformes aux bonnes pratiques de l'API Discord.  
-✅ Rapide, léger, et conçu pour une intégration facile dans vos projets.  
+## 🚀 **Key Features**  
+✅ **Secure connection** with your Discord credentials to automatically retrieve your token.  
+✅ Send **private messages**, **channel messages**, or even **reactions to messages**.  
+✅ Quickly update your **custom status**, **bio**, or even remove your current status.  
+✅ **Integrated security**: minimize ban risks with calls optimized for Discord's best practices.  
+✅ Fast, lightweight, and designed for seamless integration into your projects.  
 
 ---
 
-## ✨ **Pourquoi choisir DiscordMe ?**  
+## ✨ **Why Choose DiscordMe?**  
 
-Contrairement à d'autres bibliothèques similaires :  
-- 🎯 **Sûreté** : Nos appels à l'API Discord sont optimisés pour réduire les risques de bannissement et maintenir votre compte actif.  
-- ⚡ **Performance** : Aucune surcharge, juste ce dont vous avez besoin pour interagir avec l'API Discord efficacement.  
-- 🔒 **Respect des pratiques de Discord** : Nous mettons un point d'honneur à suivre les règles et limitations de l'API Discord.
+Unlike similar libraries:  
+- 🎯 **Safety**: Our Discord API calls are optimized to reduce ban risks and keep your account active.  
+- ⚡ **Performance**: No unnecessary overhead, just what you need to interact efficiently with the Discord API.  
+- 🔒 **Respect for Discord's guidelines**: We prioritize adhering to Discord API rules and limitations.  
 
 ---
 
 ## 📦 **Installation**  
 
-Installez DiscordMe directement via **pip** :  
+Install DiscordMe directly via **pip**:  
 ```bash
 pip install discordme.py
 ```
 
 ---
 
-## 📄 **Exemples d'utilisation**  
+## 📄 **Usage Examples**  
 
-### 🔐 **Se connecter avec vos identifiants Discord**  
+### 🔐 **Log in with your Discord credentials**  
 ```python
 from discordme import get_token
 
-email = "email@exemple.com"
-password = "votre_mot_de_passe"
+email = "email@example.com"
+password = "your_password"
 token = get_token(email, password)
 
-print(f"Votre token : {token}")
+print(f"Your token: {token}")
 ```
 
-### ✉️ **Envoyer un message dans un salon ou en MP**  
+### ✉️ **Send a message in a channel or DM**  
 ```python
 from discordme import send_message
 
-token = "votre_token"
-channel_id = "123456789012345678"  # ID du salon ou de l'utilisateur (MP)
-message = "Salut tout le monde ! 🚀"
+token = "your_token"
+channel_id = "123456789012345678"  # Channel or user ID (DM)
+message = "Hello everyone! 🚀"
 
 status_code = send_message(token, channel_id, message)
 if status_code == 200:
-    print("Message envoyé avec succès ! 🎉")
+    print("Message sent successfully! 🎉")
 else:
-    print("Échec de l'envoi du message. 😢")
+    print("Failed to send the message. 😢")
 ```
 
-### 😍 **Ajouter une réaction à un message**  
+### 😍 **Add a reaction to a message**  
 ```python
 from discordme import add_reaction
 
-reaction = "❤️"  # Emoji à ajouter
-channel_id = "123456789012345678"  # ID du salon
-message_id = "987654321098765432"  # ID du message
-token = "votre_token"
+reaction = "❤️"  # Emoji to add
+channel_id = "123456789012345678"  # Channel ID
+message_id = "987654321098765432"  # Message ID
+token = "your_token"
 
 status_code = add_reaction(reaction, channel_id, message_id, token)
 if status_code == 204:
-    print("Réaction ajoutée avec succès ! 🎉")
+    print("Reaction added successfully! 🎉")
 else:
-    print("Impossible d'ajouter la réaction. 😢")
+    print("Unable to add the reaction. 😢")
 ```
 
-### ✏️ **Changer votre statut personnalisé**  
+### ✏️ **Change your custom status**  
 ```python
 from discordme import change_status
 
-token = "votre_token"
-text = "Disponible pour coder 🐍"
+token = "your_token"
+text = "Available for coding 🐍"
 emoji = "💻"
 
 change_status(token, text, emoji)
-print("Statut personnalisé mis à jour ! 🎯")
+print("Custom status updated! 🎯")
 ```
 
-### 📝 **Modifier votre bio Discord**  
+### 📝 **Update your Discord bio**  
 ```python
 from discordme import change_bio
 
-token = "votre_token"
-new_bio = "Développeur passionné de Python et Discord API 🚀"
+token = "your_token"
+new_bio = "Passionate Python and Discord API developer 🚀"
 
 change_bio(token, new_bio)
-print("Bio mise à jour avec succès ! ✅")
+print("Bio successfully updated! ✅")
 ```
 
 ---
 
-## 🛡️ **Sécurité et conformité**  
-💡 **Important** : Discord interdit certaines pratiques pouvant entraîner le bannissement de votre compte.  
-Avec **DiscordMe**, nous :  
-- Gérons les requêtes de manière **conforme aux limitations de Discord** (rate limiting).  
-- Minimisons les risques liés à l'utilisation des tokens Discord grâce à une implémentation optimisée.  
-- Encourageons l'utilisation de méthodes respectant les [Conditions d'utilisation de Discord](https://discord.com/terms).  
+## 🛡️ **Security and Compliance**  
+💡 **Important**: Discord prohibits certain practices that can lead to account bans.  
+With **DiscordMe**, we:  
+- Handle requests **in compliance with Discord's rate-limiting rules**.  
+- Minimize risks associated with Discord token usage through optimized implementation.  
+- Encourage methods that respect Discord's [Terms of Service](https://discord.com/terms).  
 
 ---
 
-## 🛠️ **Contribuer**  
+## 🛠️ **Contribute**  
 
-Les contributions sont les bienvenues ! 🎉  
-1. Clonez le repo :  
+Contributions are welcome! 🎉  
+1. Clone the repo:  
    ```bash
-   https://github.com/wathdb/discordme.py.git
+   git clone https://github.com/wathdb/discordme.py.git
    ```  
-2. Installez les dépendances de développement :  
+2. Install the development dependencies:  
    ```bash
    pip install -r requirements.txt
    ```  
-3. Proposez vos modifications via une pull request.  
+3. Submit your changes via a pull request.  
 
 ---
 
 ## 📬 **Contact & Support**  
-💬 Vous avez des questions ou des suggestions ? Contactez-moi directement sur Discord : **wathd_**.  
+💬 Have questions or suggestions? Contact me directly on Discord: **wathd_**.  
 
 ---
 
-## 🌟 **Donnez une étoile ⭐**  
-Si ce projet vous plaît, pensez à lui donner une étoile sur GitHub pour le soutenir ! 😊  
+## 🌟 **Give a Star ⭐**  
+If you like this project, consider giving it a star on GitHub to support it! 😊  
 
 ---
 
-**Créé avec ❤️ par [wathD]**
+**Created with ❤️ by [wathD]**
