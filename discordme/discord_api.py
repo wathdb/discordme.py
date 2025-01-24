@@ -73,3 +73,15 @@ def send_message(token, channel_id, message):
     data = {"content": message}
     response = requests.post(url, json=data, headers=headers)
     return response.status_code
+
+def reply_mp(message, user_channel_id, message_id, token):
+    url = f'https://discord.com/api/v9/channels/{user_channel_id}/messages'
+    headers = {"authorization": token}
+    data = {
+        "content": message,
+        "message_reference": {
+            "channel_id": user_channel_id,
+            "message_id": message_id
+        }
+    }
+    response = requests.post(url, json=data, headers=headers)
