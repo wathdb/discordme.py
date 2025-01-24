@@ -115,11 +115,11 @@ Avec **DiscordMe**, nous :
 Les contributions sont les bienvenues ! 🎉  
 1. Clonez le repo :  
    ```bash
-   git clone https://github.com/votre-utilisateur/DiscordMe.git
+   https://github.com/wathdb/discordme.py.git
    ```  
 2. Installez les dépendances de développement :  
    ```bash
-   pip install -r requirements-dev.txt
+   pip install -r requirements.txt
    ```  
 3. Proposez vos modifications via une pull request.  
 
@@ -136,4 +136,3 @@ Si ce projet vous plaît, pensez à lui donner une étoile sur GitHub pour le so
 ---
 
 **Créé avec ❤️ par [wathD]**
-```
