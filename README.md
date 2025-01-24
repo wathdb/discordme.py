@@ -1,4 +1,4 @@
-```markdown
+
 # 🎉 DiscordMe 🐍  
 
 **Une bibliothèque Python puissante et sécurisée pour interagir avec l'API Discord en toute simplicité, tout en évitant les bannissements et restrictions de compte.**  
