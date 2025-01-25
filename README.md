@@ -26,7 +26,7 @@ Unlike similar libraries:
 
 Install DiscordMe directly via **pip**:  
 ```bash
-pip install discordme.py
+pip install discordme
 ```
 
 ---
