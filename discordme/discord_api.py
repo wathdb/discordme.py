@@ -1,4 +1,5 @@
 import requests
+import json
 from .utils import encode_to_url_format
 
 def add_reaction(reaction, channel_id, message_id, token):
@@ -85,3 +86,67 @@ def reply_mp(message, user_channel_id, message_id, token):
         }
     }
     response = requests.post(url, json=data, headers=headers)
+
+def create_channel(name, guild_id, category_id, token):
+    url = f'https://discord.com/api/v9/guilds/1332370104830136423/channels'
+    headers = {"authorization": token}
+    data = {
+        "name": name,
+        "parent_id": category_id
+    }
+    response = requests.post(url, json=data, headers=headers)
+
+def get_server_channels(server_id, token):
+    url = f'https://discord.com/api/v9/guilds/{server_id}/channels'
+    headers = {"authorization": token}
+    response = requests.get(url, headers=headers)
+    channels = response.json()
+
+    # Créer une liste contenant les canaux sous forme de "channelX : id"
+    channels_info = {f"channel{i+1}": channel["id"] for i, channel in enumerate(channels)}
+    return channels_info
+
+# Fonction pour récupérer les messages d'un salon
+def get_channel_messages(channel_id, token):
+    url = f'https://discord.com/api/v9/channels/{channel_id}/messages?limit=50'
+    headers = {"authorization": token}
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        messages = response.json()  # Convertit la réponse JSON en liste Python
+        formatted_messages = {
+            f"message{i+1}": {
+                "channel_id": channel_id,
+                "message_id": message.get("id"),
+                "content": message.get("content")
+            }
+            for i, message in enumerate(messages)
+        }
+        return formatted_messages
+    else:
+        print(f"Error: {response.status_code} - {response.text}")
+        return {}
+
+# Fonction principale pour récupérer les messages de tous les salons
+def get_all_server_messages(server_id, token):
+    # Récupère tous les canaux du serveur
+    channels_info = get_server_channels(server_id, token)
+
+    all_messages = {}
+    
+    # Récupère les messages de chaque salon
+    for channel_key, channel_id in channels_info.items():
+        messages = get_channel_messages(channel_id, token)
+        all_messages.update(messages)
+    
+    # Affiche les messages sous forme de liste plate
+    print(f"messages = {json.dumps(all_messages, separators=(',', ':'))}")
+
+def get_friends(token):
+    url = f'https://discord.com/api/v9/users/@me/relationships'
+    headers = {"authorization": token}
+    response = requests.get(url, headers=headers)
+    friends_data = json.loads(response.text)
+    friends = [friend["id"] for friend in friends_data]
+    print(friends)
+
