@@ -1,5 +1,12 @@
 import requests
 import json
+from json import loads
+from time import sleep
+from json import dumps
+from websocket import WebSocket
+from concurrent.futures import ThreadPoolExecutor
+import discordme
+import requests
 from .utils import encode_to_url_format
 
 def add_reaction(reaction, channel_id, message_id, token):
@@ -148,3 +155,83 @@ def unblock_user(user_id, token):
     url = f'https://discord.com/api/v9/users/@me/relationships/{user_id}'
     headers = {"authorization": token}
     response = requests.delete(url, headers=headers)
+
+def typing(user_channel_id, token):
+    url = f'https://discord.com/api/v9/channels/{user_channel_id}/typing'
+    headers = {"authorization": token}
+    response = requests.post(url, headers=headers)
+
+def send_soundboard(channel_id, sound_number, emoji, token):
+    url = f'https://discord.com/api/v9/channels/{channel_id}/send-soundboard-sound'
+    headers = {"authorization": token}
+    data = {
+    "sound_id": "2", 
+    "emoji_id": "null", 
+    "emoji_name": "🔊"
+ }
+    response = requests.post(url, json=data, headers=headers)
+    print(response.text)
+
+def join_vocal(guild_id, channel_id, token):
+    tokenlist = [f'{token}']
+    executor = ThreadPoolExecutor(max_workers=10)  # Limité à 10 threads pour éviter une surcharge
+    mute = False
+    deaf = False
+
+    def run(token):
+        try:
+            ws = WebSocket()
+            ws.connect("wss://gateway.discord.gg/?v=9&encoding=json")
+            hello = loads(ws.recv())
+            heartbeat_interval = hello['d']['heartbeat_interval']
+
+            # Authentification avec le token
+            ws.send(dumps({
+                "op": 2,
+                "d": {
+                    "token": token,
+                    "properties": {
+                        "$os": "windows",
+                        "$browser": "Discord",
+                        "$device": "desktop"
+                    }
+                }
+            }))
+
+            # Rejoindre un canal vocal
+            ws.send(dumps({
+                "op": 4,
+                "d": {
+                    "guild_id": guild_id,
+                    "channel_id": channel_id,
+                    "self_mute": mute,
+                    "self_deaf": deaf
+                }
+            }))
+
+            # Définir une région préférée pour la connexion
+            ws.send(dumps({
+                "op": 18,
+                "d": {
+                    "type": "guild",
+                    "guild_id": guild_id,
+                    "channel_id": channel_id,
+                    "preferred_region": "singapore"
+                }
+            }))
+
+            # Maintenir la connexion avec le Heartbeat
+            while True:
+                sleep(heartbeat_interval / 1000)
+                try:
+                    ws.send(dumps({"op": 1, "d": None}))
+                except Exception:
+                    print("Erreur lors de l'envoi du heartbeat. Déconnexion.")
+                    break
+
+        except Exception as e:
+            print(f"Erreur dans la connexion WebSocket : {e}")
+
+    # Lancer un thread par token
+    for token in tokenlist:
+        executor.submit(run, token)
