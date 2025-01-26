@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="discordme",
-    version="0.2.7",
+    version="0.2.9",
     author="wathD",
     author_email="wathd_developement@proton.me",
     description="Une bibliothèque Python open-source permetant d'interagir simplement avec Discord",
