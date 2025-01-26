@@ -127,20 +127,6 @@ def get_channel_messages(channel_id, token):
         print(f"Error: {response.status_code} - {response.text}")
         return {}
 
-# Fonction principale pour récupérer les messages de tous les salons
-def get_all_server_messages(server_id, token):
-    # Récupère tous les canaux du serveur
-    channels_info = get_server_channels(server_id, token)
-
-    all_messages = {}
-    
-    # Récupère les messages de chaque salon
-    for channel_key, channel_id in channels_info.items():
-        messages = get_channel_messages(channel_id, token)
-        all_messages.update(messages)
-    
-    # Affiche les messages sous forme de liste plate
-    print(f"messages = {json.dumps(all_messages, separators=(',', ':'))}")
 
 def get_friends(token):
     url = f'https://discord.com/api/v9/users/@me/relationships'
@@ -150,3 +136,15 @@ def get_friends(token):
     friends = [friend["id"] for friend in friends_data]
     print(friends)
 
+def block_user(user_id, token):
+    url = f'https://discord.com/api/v9/users/@me/relationships/{user_id}'
+    headers = {"authorization": token}
+    data = {
+        "type": "2",
+    }
+    response = requests.put(url, json=data, headers=headers)
+
+def unblock_user(user_id, token):
+    url = f'https://discord.com/api/v9/users/@me/relationships/{user_id}'
+    headers = {"authorization": token}
+    response = requests.delete(url, headers=headers)
