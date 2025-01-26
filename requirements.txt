@@ -1,3 +1,7 @@
 requests
 urllib
 json
+time
+websocket-client
+concurrent-futures
+discordme
