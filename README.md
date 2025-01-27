@@ -105,7 +105,8 @@ print("Bio successfully updated! ✅")
 With **DiscordMe**, we:  
 - Handle requests **in compliance with Discord's rate-limiting rules**.  
 - Minimize risks associated with Discord token usage through optimized implementation.  
-- Encourage methods that respect Discord's [Terms of Service](https://discord.com/terms).  
+- Encourage methods that respect Discord's [Terms of Service](https://discord.com/terms).
+- The only options that can affect your account are the captcha protected options.
 
 ---
 
