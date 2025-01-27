@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="discordme",
-    version="0.2.9",
+    version="0.3.0",
     author="wathD",
     author_email="wathd_developement@proton.me",
     description="Une bibliothèque Python open-source permetant d'interagir simplement avec Discord",
@@ -10,7 +10,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/wathdb/discordme.py",
     packages=find_packages(),
-    install_requires=[],  # Ajoutez des dépendances ici
+    install_requires=["requests", "urllib", "json", "time", "websocket-client", "concurrent-futures", "discordme"],  # Ajoutez des dépendances ici
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
